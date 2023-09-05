@@ -15,11 +15,11 @@ pipeline {
                 remote.user = userName
                 remote.identityFile = identity
                 stage("Enforce Compliance with Ansible") {
-                  sshCommand remote: remote, sudo: true, command: 'echo "cd /home/custlynotts/secops/ansible && git pull origin"'
+                  sshCommand remote: remote, sudo: true, command: 'echo "cd /home/ccedeno/secops/ansible && git pull origin"'
                   sshCommand remote: remote, sudo: true, command: 'echo "cd /root/secops/ansible && ansible-playbook compliance.yaml"'
               }
                 stage("Scan with InSpec") {
-                  sshCommand remote: remote, sudo: true, command: 'inspec exec --no-distinct-exit /home/custlynotts/linux-baseline/'
+                  sshCommand remote: remote, sudo: true, command: 'inspec exec --no-distinct-exit /home/ccedeno/linux-baseline/'
               }
             }
           }
